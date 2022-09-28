@@ -41,4 +41,37 @@ public class NewsController : ControllerBase
         
         return Ok(newsId);
     }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(IEnumerable<EditorNews>), (int) HttpStatusCode.OK)]
+    public async Task<ActionResult<EditorNews>> CreateNews([FromBody] EditorNews news)
+    {
+        await _context.EditNews.InsertOneAsync(news);
+        var result = _mapper.Map<EditorNews>(news);
+        return Ok(result);
+    }
+    
+    [HttpPut]
+    [ProducesResponseType(typeof(EditorNews), (int)HttpStatusCode.OK)]
+    public async Task<bool> UpdateNews([FromBody] EditorNews news)
+    {
+        var updateNews = await _context.EditNews.
+            ReplaceOneAsync(filter: g => g.Id == news.Id, replacement: news);
+
+        return updateNews.IsAcknowledged && updateNews.ModifiedCount > 0;
+    }
+    
+    [HttpDelete("{id}")]
+    [ProducesResponseType(typeof(EditorNews), (int)HttpStatusCode.OK)]
+    public async Task<bool> DeleteNews(string id)
+    {
+        FilterDefinition<EditorNews> filter = Builders<EditorNews>.Filter.Eq(p => p.Id, id);
+
+        DeleteResult deleteResult = await _context
+            .EditNews
+            .DeleteOneAsync(filter);
+
+        return deleteResult.IsAcknowledged
+               && deleteResult.DeletedCount > 0;
+    }
 }
