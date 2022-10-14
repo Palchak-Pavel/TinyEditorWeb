@@ -2,6 +2,20 @@ using News.API.Mapper;
 using News.API.Mongodb.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+/*builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:7158/news",
+                    "https://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});*/
+
 
 // Add services to the container.
 builder.Services.AddScoped<IMongoNewsContext, NewsContext>();
@@ -20,6 +34,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseHttpsRedirection();
 
