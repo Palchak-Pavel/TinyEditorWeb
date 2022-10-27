@@ -2,19 +2,14 @@ using News.API.Mapper;
 using News.API.Mongodb.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-/*builder.Services.AddCors(options =>
+var devCorsPolicy = "devCorsPolicy";
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy(MyAllowSpecificOrigins,
-        policy =>
-        {
-            policy.WithOrigins("https://localhost:7158/news",
-                    "https://localhost:3000")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
-});*/
+    options.AddPolicy(devCorsPolicy, builder => {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 
 // Add services to the container.
@@ -33,9 +28,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+    // У меня получилось вот таким способ
+    app.UseCors(devCorsPolicy);
 }
 
-app.UseCors(MyAllowSpecificOrigins);
+//app.UseCors(MyAllowSpecificOrigins);
 
 app.UseHttpsRedirection();
 
