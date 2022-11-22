@@ -46,6 +46,7 @@ public class NewsController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<EditorNews>), (int) HttpStatusCode.OK)]
     public async Task<ActionResult<EditorNews>> CreateNews([FromBody] EditorNews news)
     {
+        news.CreatedAt = DateTime.Now;
         await _context.EditNews.InsertOneAsync(news);
         var result = _mapper.Map<EditorNews>(news);
         return Ok(result);
@@ -58,7 +59,7 @@ public class NewsController : ControllerBase
         var updateNews = await _context.EditNews.
             ReplaceOneAsync(filter: g => g.Id == news.Id, replacement: news);
 
-        return updateNews.IsAcknowledged && updateNews.ModifiedCount > 0;
+       return updateNews.IsAcknowledged && updateNews.ModifiedCount > 0;
     }
     
     [HttpDelete("{id}")]

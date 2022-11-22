@@ -30,7 +30,7 @@ public class NewsDto
     public string H1 { get; set; } 
     public string Description { get; set; } 
 
-    /*[DataType(DataType.Date)]
+    [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{dd.MM.yyyy}", ApplyFormatInEditMode = true)]
 
     public DateTime CreatedAt { get; set; }
@@ -43,5 +43,5 @@ public class NewsDto
     public DateTime LastModifiedAt { get; set; }
 
     public LastModifiedBy[] LastModifiedBy { get; set; } 
-    public string Content { get; set; } */
+    public string Content { get; set; }
 }
