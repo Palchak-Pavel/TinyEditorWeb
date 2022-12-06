@@ -1,5 +1,9 @@
+using System.Reflection;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using News.API.Mapper;
 using News.API.Mongodb.Data;
+using News.API.Mongodb.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +21,12 @@ builder.Services.AddScoped<IMongoNewsContext, NewsContext>();
 
 builder.Services.AddAutoMapper(typeof(ApiMappingProfile));
 builder.Services.AddControllers();
+
+
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -29,7 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     
-    // У меня получилось вот таким способ
+
     app.UseCors(devCorsPolicy);
 }
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson.Serialization.IdGenerators;
@@ -13,10 +14,11 @@ public class EditorNews : EntityBase
     [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; } 
-    public string? Title { get; set; }
-    public string Url { get; set; } = null!;
+    
+    public string Title { get; set; } = null!;
+    public string? Url { get; set; }
     public string H1 { get; set; } = null!;
-    public string? Description { get; set; }
+    public string Description { get; set; }= null!;
     
     [DataType(DataType.DateTime)]
     [DisplayFormat(DataFormatString = "{dd.MM.yyyy}", ApplyFormatInEditMode = true)]
@@ -28,5 +30,5 @@ public class EditorNews : EntityBase
      public DateTime LastModifiedAt { get; set; }
      
      public LastModifiedBy LastModifiedBy { get; set; } = null!;*/
-     public string? Content { get; set; } 
+     public string Content { get; set; } = null!;
 }

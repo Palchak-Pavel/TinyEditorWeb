@@ -1,12 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "LmbCuIgFSF1KDUFN8GGTl/EwBRT3sOflhzeJz9k/gJuUeYWM3lwctzxndTjXlE0Czeb3nfo+IfbP0STmUJRP1A==",
+  "dgSpecHash": "WDKA3rFNPpHSVLJJJs88oQhwcCaIO8JReY4lQPNQWQ56p0kz6Wp894SSoD4T6ZqWF1obn7pAFPTI11dcYNUhww==",
   "success": true,
   "projectFilePath": "C:\\git\\TinyEditor\\News.API\\News.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Павел Пальчак\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Павел Пальчак\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\Павел Пальчак\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
+    "C:\\Users\\Павел Пальчак\\.nuget\\packages\\fluentvalidation\\11.4.0\\fluentvalidation.11.4.0.nupkg.sha512",
+    "C:\\Users\\Павел Пальчак\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.2.2\\fluentvalidation.aspnetcore.11.2.2.nupkg.sha512",
+    "C:\\Users\\Павел Пальчак\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.2.1\\fluentvalidation.dependencyinjectionextensions.11.2.1.nupkg.sha512",
     "C:\\Users\\Павел Пальчак\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Павел Пальчак\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\Павел Пальчак\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",

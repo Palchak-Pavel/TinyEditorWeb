@@ -1,5 +1,8 @@
 ﻿using System.Net;
 using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using News.API.DTO;
@@ -15,11 +18,13 @@ public class NewsController : ControllerBase
 {
     private readonly IMongoNewsContext _context;
     private readonly IMapper _mapper;
+    /*private IValidator<EditorNews> _validator;*/
 
     public NewsController(IMongoNewsContext context, IMapper mapper)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        /*_validator = validator;*/
     }
     
     [HttpGet]
@@ -46,6 +51,12 @@ public class NewsController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<EditorNews>), (int) HttpStatusCode.OK)]
     public async Task<ActionResult<EditorNews>> CreateNews([FromBody] EditorNews news)
     {
+        /*ValidationResult res = await _validator.ValidateAsync(news);
+        if (!res.IsValid)
+        {
+            res.AddToModelState(this.ModelState);
+        }*/
+        
         news.CreatedAt = DateTime.Now;
         await _context.EditNews.InsertOneAsync(news);
         var result = _mapper.Map<EditorNews>(news);
@@ -54,7 +65,8 @@ public class NewsController : ControllerBase
     
     [HttpPut]
     [ProducesResponseType(typeof(EditorNews), (int)HttpStatusCode.OK)]
-    public async Task<bool> UpdateNews([FromBody] EditorNews news)
+    [Route("{id}")]
+    public async Task<bool> UpdateNews(string id, [FromBody] EditorNews news)
     {
         var updateNews = await _context.EditNews.
             ReplaceOneAsync(filter: g => g.Id == news.Id, replacement: news);
